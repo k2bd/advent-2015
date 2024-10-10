@@ -18,7 +18,7 @@ pub fn part_two(input: &str) -> Option<usize> {
         .map(|(ind, c)| (ind, bracket_value(c)))
         .scan(0, |sum, (ind, v)| {
             *sum += v;
-            return Some((ind, *sum));
+            Some((ind, *sum))
         })
         .find_map(|(ind, sum)| if sum < 0 { Some(ind + 1) } else { None })
 }
