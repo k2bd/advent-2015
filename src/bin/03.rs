@@ -75,15 +75,11 @@ pub fn part_two(input: &str) -> Option<u32> {
                         _ => panic!("Impossible remainder"),
                     };
 
-                    Some((*santa_pos, *robo_santa_pos))
+                    Some([*santa_pos, *robo_santa_pos])
                 },
             )
-            .chain([(Coord::origin(), Coord::origin())])
-            .fold(Vec::<Coord>::new(), |mut v, (santa_pos, robo_pos)| {
-                v.extend([santa_pos, robo_pos]);
-                v
-            })
-            .into_iter()
+            .chain([[Coord::origin(), Coord::origin()]])
+            .flatten()
             .collect::<HashSet<_>>()
             .len() as u32,
     )
