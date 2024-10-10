@@ -15,9 +15,7 @@ fn advent_coin_miner(input: &str, condition: fn(hash: Digest) -> bool) -> Option
 
 pub fn part_one(input: &str) -> Option<u32> {
     advent_coin_miner(input, |hash| {
-        (hash.0[0] == 0u8)
-            && (hash.0[1] == 0u8)
-            && (hash.0[2] | 0b0000_1111 == 0b0000_1111)
+        (hash.0[0] == 0u8) && (hash.0[1] == 0u8) && (hash.0[2] | 0b0000_1111 == 0b0000_1111)
     })
 }
 
