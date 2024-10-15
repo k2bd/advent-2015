@@ -140,13 +140,13 @@ fn parse_instruction(instruction: &str) -> (String, CircuitComponent) {
 }
 
 pub fn part_one(input: &str) -> Option<u16> {
-    let mut cache = HashMap::<String, Option<u16>>::new();
+    let mut cache = ResCache::new();
     CircuitBoard::from_instructions(input).get_signal(&"a".to_string(), &mut cache)
 }
 
 pub fn part_two(input: &str) -> Option<u16> {
     let mut board = CircuitBoard::from_instructions(input);
-    let mut cache = HashMap::<String, Option<u16>>::new();
+    let mut cache = ResCache::new();
 
     let original_a = board.get_signal(&"a".to_string(), &mut cache).unwrap();
     board.components.insert(
@@ -176,7 +176,7 @@ mod tests {
         let instructions = "123 -> x\n456 -> y\nx AND y -> d\nx OR y -> e\nx LSHIFT 2 -> f\ny RSHIFT 2 -> g\nNOT x -> h\nNOT y -> i";
         let board = CircuitBoard::from_instructions(instructions);
 
-        let mut cache = HashMap::<String, Option<u16>>::new();
+        let mut cache = ResCache::new();
 
         assert_eq!(board.get_signal(&wire_id, &mut cache), expected_signal);
     }
