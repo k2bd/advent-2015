@@ -134,12 +134,9 @@ fn parse_component(component_str: &str) -> CircuitComponent {
 }
 
 fn parse_instruction(instruction: &str) -> (String, CircuitComponent) {
-    let mut i = instruction.split(" -> ");
+    let (instruction_part, target) = instruction.split_once(" -> ").unwrap();
 
-    let instruction_part = i.next().unwrap();
-    let target = i.next().unwrap().to_string();
-
-    (target, parse_component(instruction_part))
+    (target.to_string(), parse_component(instruction_part))
 }
 
 pub fn part_one(input: &str) -> Option<u16> {
